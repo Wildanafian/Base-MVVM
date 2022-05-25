@@ -1,5 +1,6 @@
 # Base-MVVM
 
-* Coroutines
-* Live Data
-* Koin Dependency Injection
+* Clean Architecture
+* Coroutine & Flow
+* Hilt Dependency Injection
+* and some jetpack lib
