@@ -1,82 +1,113 @@
 package com.base.myapplication.base
 
-import android.app.Dialog
+import android.app.AlertDialog
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.Window
-import android.widget.ImageView
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.Glide
+import androidx.viewbinding.ViewBinding
 import com.base.myapplication.R
+import com.base.myapplication.databinding.CustomLoadingBinding
+import com.bumptech.glide.Glide
+import com.crowdfire.cfalertdialog.CFAlertDialog
 
-abstract class BaseFragment(val layout : Int) : Fragment(layout), View.OnClickListener {
+/**
+ * Created by Wildan Nafian on 12/01/2022.
+ * Github https://github.com/Wildanafian
+ * wildanafian8@gmail.com
+ */
 
-    private var loadingDialog: Dialog? = null
-    private var popupDialog: PopUpDialog? = null
+abstract class BaseFragment<out VB: ViewBinding> : Fragment(), BaseCommonFunction {
 
-    override fun onPause() {
-        super.onPause()
-        loadingDialog?.dismiss()
-        popupDialog?.dismiss()
+    private var _binding: ViewBinding? = null
+    abstract val bindingInflater: (LayoutInflater) -> VB
+
+    @Suppress("UNCHECKED_CAST")
+    protected val bind: VB
+        get() = this._binding as VB
+
+    private var _loadingBinding: CustomLoadingBinding? = null
+    private val loadingBinding get() = _loadingBinding!!
+    private lateinit var loadingAlert: AlertDialog
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        _binding = bindingInflater.invoke(layoutInflater)
+        initView()
+        initListener()
+        initObserver()
+        return requireNotNull(_binding).root
     }
+
     override fun onDestroy() {
         super.onDestroy()
-        loadingDialog?.dismiss()
-        popupDialog?.dismiss()
+        showLoadingDialog(false)
+        _binding = null
     }
 
-    fun startLoading() {
-        if (loadingDialog == null) {
-            initLoading()
-            loadingDialog?.show()
-        } else if (!loadingDialog?.isShowing!!) {
-            loadingDialog?.show()
+    override fun initView() {
+        setBaseLoading(requireContext())
+    }
+
+    override fun initListener() {}
+
+    override fun initObserver() {}
+
+    override fun String?.makeToast() {
+        Toast.makeText(requireContext(), this ?: "null", Toast.LENGTH_SHORT).show()
+    }
+
+//    protected fun gooTo(directions: NavDirections) = findNavController().navigate(directions)
+
+    private fun showDialog(title: String, message: String, button: String) {
+        val builder = CFAlertDialog.Builder(requireContext())
+            .setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT)
+            .setTitle(title)
+            .setMessage(message)
+            .setCancelable(false)
+        builder.addButton(
+            button,
+            Color.parseColor("#ffffff"),
+            Color.parseColor("#429ef4"),
+            CFAlertDialog.CFAlertActionStyle.POSITIVE,
+            CFAlertDialog.CFAlertActionAlignment.JUSTIFIED
+        ) { dialog, _ -> dialog.dismiss() }
+        builder.show()
+    }
+
+    fun makeInfoDialog(title: String = "Info", message: String, button: String = "OK"){
+        showDialog(title, message, button)
+    }
+
+    private fun setBaseLoading(context: Context) {
+        _loadingBinding = CustomLoadingBinding.inflate(layoutInflater)
+
+        val dialogBuilder = AlertDialog.Builder(context)
+        dialogBuilder.setView(loadingBinding.root)
+
+        Glide.with(context)
+            .asGif()
+            .load(R.raw.loading_gif)
+            .into(loadingBinding.customLoading)
+
+        loadingAlert = dialogBuilder.create().apply {
+            window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            setCancelable(false)
+            setCanceledOnTouchOutside(false)
         }
     }
 
-    fun finishedLoading() = loadingDialog?.dismiss()
-
-    fun failureTask(message: String) = generateDialog("Error", message, "OK")
-
-    fun warningTask(message: String) = generateDialog("Warning", message, "OK")
-
-    fun infoTask(message: String) = generateDialog("Info", message, "OK")
-
-    fun toast(message: String?) = Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-
-    fun toastLong(message: String?) = Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
-
-    private fun initLoading() {
-        loadingDialog = Dialog(requireContext())
-        loadingDialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        loadingDialog?.setContentView(LayoutInflater.from(requireContext()).inflate(R.layout.custom_loading_dialog, null))
-        loadingDialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        loadingDialog?.setCancelable(false)
-    }
-
-    private fun initDialog(title: String, message: String, button: String) {
-        popupDialog = PopUpDialog(requireContext(), title, message, button)
-        popupDialog?.show()
-    }
-
-    private fun generateDialog(title: String, message: String, button: String) {
-        if (popupDialog == null) {
-            initDialog(title, message, button)
-        } else if (popupDialog?.isShowing!!) {
-            popupDialog?.dismiss()
-            initDialog(title, message, button)
+    fun showLoadingDialog(status: Boolean) {
+        if (::loadingAlert.isInitialized) {
+            if (status) {
+                loadingAlert.show()
+            } else {
+                loadingAlert.dismiss()
+            }
         }
-    }
-
-    override fun onClick(p0: View?) {}
-
-    fun loadImage(view: ImageView, url: String){
-        Glide.with(view.context)
-            .load(url)
-            .thumbnail(0.25f)
-            .into(view)
     }
 }

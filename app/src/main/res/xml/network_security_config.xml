@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false" />
+
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">http://play.google.com</domain>
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+
+<!--        <pin-set>-->
+<!--            <pin digest="SHA-256">zxczxczxczxczxczxczxczxczxczxczxczxcczxczxc=</pin> &lt;!&ndash;dev&ndash;&gt;-->
+<!--            <pin digest="SHA-256">zxczxczxczxczxczxczxczxczxczxczxczxcczxczxc=</pin> &lt;!&ndash;uat&ndash;&gt;-->
+<!--            <pin digest="SHA-256">zxczxczxczxczxczxczxczxczxczxczxczxcczxczxc=</pin> &lt;!&ndash;prod&ndash;&gt;-->
+<!--        </pin-set>-->
+    </domain-config>
+</network-security-config>
