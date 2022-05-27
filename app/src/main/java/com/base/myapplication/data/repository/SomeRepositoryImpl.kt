@@ -4,8 +4,7 @@ import com.base.myapplication.data.model.ArticlesItem
 import com.base.myapplication.data.repository.remote.SomeRemoteData
 import com.base.myapplication.data.repository.remote.network.ConsumeResult
 import com.base.myapplication.data.repository.remote.network.RemoteResult
-import com.base.myapplication.di.IoDispatcher
-import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -19,8 +18,7 @@ import javax.inject.Inject
  */
 
 class SomeRepositoryImpl @Inject constructor(
-    private val someRemoteData: SomeRemoteData,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
+    private val someRemoteData: SomeRemoteData
 ) :
     SomeRepository {
 
@@ -33,7 +31,7 @@ class SomeRepositoryImpl @Inject constructor(
             }
         }.catch {
             emit(ConsumeResult.onError(Exception(it)))
-        }.flowOn(ioDispatcher)
+        }.flowOn(Dispatchers.IO)
     }
 
     //sample 2

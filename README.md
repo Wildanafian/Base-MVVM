@@ -2,5 +2,5 @@
 
 * Clean Architecture
 * Coroutine & Flow
-* Hilt Dependency Injection
+* Dagger Dependency Injection
 * and some jetpack lib

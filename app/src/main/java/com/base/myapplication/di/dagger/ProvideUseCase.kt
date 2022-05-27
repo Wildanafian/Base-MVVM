@@ -1,11 +1,9 @@
-package com.base.myapplication.di
+package com.base.myapplication.di.dagger
 
 import com.base.myapplication.domain.MainActivityUseCase
 import com.base.myapplication.domain.MainActivityUseCaseImpl
 import dagger.Binds
 import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
 
 /**
  * Created by Wildan Nafian on 25/05/2022.
@@ -15,7 +13,6 @@ import dagger.hilt.components.SingletonComponent
 
 
 @Module
-@InstallIn(SingletonComponent::class)
 interface ProvideUseCase {
 
     @Binds

@@ -23,7 +23,7 @@ interface ApiInterface {
     suspend fun getAllNews(
         @Query("q") q: String? = "tesla",
         @Query("page") page: Int? = 1,
-        @Query("apiKey") apiKey: String? = "your key"
+        @Query("apiKey") apiKey: String? = "a5bf56b6153c4ee9bd64368cba3e1317"
     ): Response<ResponseNewsApi>
 
 }

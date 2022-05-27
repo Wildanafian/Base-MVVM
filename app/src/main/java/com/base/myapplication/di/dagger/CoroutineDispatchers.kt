@@ -1,9 +1,7 @@
-package com.base.myapplication.di
+package com.base.myapplication.di.dagger
 
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Qualifier
@@ -15,8 +13,7 @@ import javax.inject.Qualifier
  */
 
 @Module
-@InstallIn(SingletonComponent::class)
-object ProvideCoroutineDispatchers {
+class CoroutineDispatchers {
 
     @DefaultDispatcher
     @Provides

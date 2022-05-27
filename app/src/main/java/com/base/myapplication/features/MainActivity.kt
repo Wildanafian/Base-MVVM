@@ -1,11 +1,17 @@
 package com.base.myapplication.features
 
+import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.lifecycle.ViewModelProvider
+import com.base.myapplication.MainApplication
 import com.base.myapplication.base.BaseActivity
+import com.base.myapplication.data.repository.local.sharedpreference.SharedPref
 import com.base.myapplication.data.repository.remote.network.ConsumeResult
 import com.base.myapplication.databinding.ActivityMainBinding
-import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 /**
  * Created by Wildan Nafian on 25/05/2022.
@@ -14,14 +20,20 @@ import dagger.hilt.android.AndroidEntryPoint
  */
 
 
-@AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
-    private val viewModel: MainActivityViewModel by viewModels()
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel: MainActivityViewModel by viewModels { viewModelFactory }
     private val adapter by lazy { ExampleAdapter() }
 
     override val bindingInflater: (LayoutInflater) -> ActivityMainBinding
         get() = ActivityMainBinding::inflate
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        (applicationContext as MainApplication).appComponet.inject(this)
+        super.onCreate(savedInstanceState)
+    }
 
     override fun initListener() {
         bind.tvHello.setOnClickListener {

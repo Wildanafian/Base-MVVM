@@ -1,11 +1,9 @@
-package com.base.myapplication.di
+package com.base.myapplication.di.dagger
 
 import com.base.myapplication.data.repository.local.sharedpreference.SharedPref
 import com.base.myapplication.data.repository.local.sharedpreference.SharedPrefImpl
 import dagger.Binds
 import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
 
 
 /**
@@ -15,7 +13,6 @@ import dagger.hilt.components.SingletonComponent
  */
 
 @Module
-@InstallIn(SingletonComponent::class)
 interface ProvideSharedPreferences {
 
     @Binds

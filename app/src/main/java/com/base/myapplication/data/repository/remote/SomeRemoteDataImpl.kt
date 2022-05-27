@@ -2,8 +2,7 @@ package com.base.myapplication.data.repository.remote
 
 import com.base.myapplication.data.repository.remote.network.ApiInterface
 import com.base.myapplication.data.repository.remote.network.BaseDataSource
-import com.base.myapplication.di.IoDispatcher
-import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -14,12 +13,11 @@ import javax.inject.Inject
  */
 
 class SomeRemoteDataImpl @Inject constructor(
-    private val apiInterface: ApiInterface,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
+    private val apiInterface: ApiInterface
 ) : SomeRemoteData,
     BaseDataSource() {
 
-    override suspend fun getSomeData() = withContext(ioDispatcher) {
+    override suspend fun getSomeData() = withContext(Dispatchers.IO) {
         getResult { apiInterface.getAllNews() }
     }
 

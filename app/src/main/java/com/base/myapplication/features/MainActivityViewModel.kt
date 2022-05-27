@@ -7,7 +7,6 @@ import com.base.myapplication.data.model.ArticlesItem
 import com.base.myapplication.data.repository.local.sharedpreference.SharedPref
 import com.base.myapplication.data.repository.remote.network.ConsumeResult
 import com.base.myapplication.domain.MainActivityUseCase
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
@@ -19,8 +18,6 @@ import javax.inject.Inject
  * wildanafian8@gmail.com
  */
 
-
-@HiltViewModel
 class MainActivityViewModel @Inject constructor(
     private val useCase: MainActivityUseCase,
     private val preferences: SharedPref
@@ -34,7 +31,7 @@ class MainActivityViewModel @Inject constructor(
                 .onStart { emit(ConsumeResult.onLoading(true)) }
                 .onCompletion {
                     emit(ConsumeResult.onLoading(false))
-                    preferences.writeTo("testpref", "cakeeep")
+                    preferences.writeTo("testpref", "cakeeep2")
                 }
                 .collect { emit(it) }
         }

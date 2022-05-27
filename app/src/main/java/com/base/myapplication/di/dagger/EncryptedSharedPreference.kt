@@ -1,4 +1,4 @@
-package com.base.myapplication.di
+package com.base.myapplication.di.dagger
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -10,9 +10,6 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
 import java.security.KeyPairGenerator
 import javax.inject.Singleton
 
@@ -23,12 +20,11 @@ import javax.inject.Singleton
  */
 
 @Module
-@InstallIn(SingletonComponent::class)
-object EncryptedSharedPreference {
+class EncryptedSharedPreference () {
 
     @Singleton
     @Provides
-    fun provideInitSharedPreference(@ApplicationContext context: Context): SharedPreferences {
+    fun provideInitSharedPreference(context: Context): SharedPreferences {
         return EncryptedSharedPreferences.create(
             "YourName",
             createMasterKey(),

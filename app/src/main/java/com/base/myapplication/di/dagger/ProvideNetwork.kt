@@ -1,11 +1,9 @@
-package com.base.myapplication.di
+package com.base.myapplication.di.dagger
 
 import com.base.myapplication.data.repository.remote.network.ApiEndPoint.BASE_URL
 import com.base.myapplication.data.repository.remote.network.ApiInterface
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -19,8 +17,7 @@ import javax.inject.Singleton
  */
 
 @Module
-@InstallIn(SingletonComponent::class)
-object ProvideNetwork {
+class ProvideNetwork {
 
     @Singleton
     @Provides

@@ -1,14 +1,11 @@
-package com.base.myapplication.di
+package com.base.myapplication.di.dagger
 
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import javax.inject.Qualifier
-import javax.inject.Singleton
 
 
 /**
@@ -18,10 +15,8 @@ import javax.inject.Singleton
  */
 
 @Module
-@InstallIn(SingletonComponent::class)
-object ProvideCoroutineScope {
+class CoroutineScope {
 
-    @Singleton
     @Provides
     @ApplicationScope
     fun provideCoroutineScope(@DefaultDispatcher dispatcher: CoroutineDispatcher): CoroutineScope {
