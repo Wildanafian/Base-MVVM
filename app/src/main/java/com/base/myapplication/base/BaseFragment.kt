@@ -10,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.base.myapplication.R
 import com.base.myapplication.databinding.CustomLoadingBinding
@@ -22,7 +24,7 @@ import com.crowdfire.cfalertdialog.CFAlertDialog
  * wildanafian8@gmail.com
  */
 
-abstract class BaseFragment<out VB: ViewBinding> : Fragment(), BaseCommonFunction {
+abstract class BaseFragment<out VB : ViewBinding> : Fragment(), BaseCommonFunction {
 
     private var _binding: ViewBinding? = null
     abstract val bindingInflater: (LayoutInflater) -> VB
@@ -35,7 +37,11 @@ abstract class BaseFragment<out VB: ViewBinding> : Fragment(), BaseCommonFunctio
     private val loadingBinding get() = _loadingBinding!!
     private lateinit var loadingAlert: AlertDialog
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         _binding = bindingInflater.invoke(layoutInflater)
         initView()
         initListener()
@@ -61,7 +67,7 @@ abstract class BaseFragment<out VB: ViewBinding> : Fragment(), BaseCommonFunctio
         Toast.makeText(requireContext(), this ?: "null", Toast.LENGTH_SHORT).show()
     }
 
-//    protected fun gooTo(directions: NavDirections) = findNavController().navigate(directions)
+    protected fun gooTo(directions: NavDirections) = findNavController().navigate(directions)
 
     private fun showDialog(title: String, message: String, button: String) {
         val builder = CFAlertDialog.Builder(requireContext())
@@ -79,7 +85,7 @@ abstract class BaseFragment<out VB: ViewBinding> : Fragment(), BaseCommonFunctio
         builder.show()
     }
 
-    fun makeInfoDialog(title: String = "Info", message: String, button: String = "OK"){
+    fun makeInfoDialog(title: String = "Info", message: String, button: String = "OK") {
         showDialog(title, message, button)
     }
 

@@ -1,4 +1,4 @@
-package com.base.myapplication.features
+package com.base.myapplication.features.fragA
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

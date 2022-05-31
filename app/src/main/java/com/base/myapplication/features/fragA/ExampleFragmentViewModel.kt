@@ -1,4 +1,4 @@
-package com.base.myapplication.features
+package com.base.myapplication.features.fragA
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -21,7 +21,7 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class MainActivityViewModel @Inject constructor(
+class ExampleFragmentViewModel @Inject constructor(
     private val useCase: MainActivityUseCase,
     private val preferences: SharedPref
 ) :

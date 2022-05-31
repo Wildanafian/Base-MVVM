@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/exampleFragment">
+
+    <fragment
+        android:id="@+id/exampleFragment"
+        android:name="com.base.myapplication.features.fragA.ExampleFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_exampleFragment_to_BFragment"
+            app:destination="@id/BFragment" />
+        <argument
+            android:name="data"
+            app:argType="string"
+            android:defaultValue="passing data example" />
+    </fragment>
+    <fragment
+        android:id="@+id/BFragment"
+        android:name="com.base.myapplication.features.fagB.ExampleFragmentB"
+        android:label="fragment_b"
+        tools:layout="@layout/fragment_b" >
+        <action
+            android:id="@+id/action_BFragment_to_exampleFragment"
+            app:destination="@id/exampleFragment" />
+    </fragment>
+</navigation>

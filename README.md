@@ -1,6 +1,7 @@
 # Base-MVVM
 
+* Single Activity
 * Clean Architecture
 * Coroutine & Flow
 * Hilt Dependency Injection
-* and some jetpack lib
+* and some Jetpack Lib
