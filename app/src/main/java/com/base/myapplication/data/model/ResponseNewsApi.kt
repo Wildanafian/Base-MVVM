@@ -57,10 +57,11 @@ data class ArticlesItem(
 	val content: String
 )
 
-data class NewsData(
-	val publishedAt: String? = "",
+data class ArticlesItemFiltered(
+
 	val author: String? = "",
-	val urlToImage: String? = "",
-	val description: String? = "",
-	val title: String? = ""
+
+	val title: String? = "",
+
+	val url: String? = ""
 )

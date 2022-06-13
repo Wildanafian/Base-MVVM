@@ -1,14 +1,11 @@
 package com.base.myapplication.features
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.base.myapplication.MainApplication
 import com.base.myapplication.base.BaseActivity
-import com.base.myapplication.data.repository.local.sharedpreference.SharedPref
 import com.base.myapplication.data.repository.remote.network.ConsumeResult
 import com.base.myapplication.databinding.ActivityMainBinding
 import javax.inject.Inject
@@ -46,19 +43,21 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     override fun initObserver() {
-        viewModel.getSomething().observe(this) {
+        viewModel.newsData.observe(this) {
             when (it) {
                 is ConsumeResult.onSuccess -> {
                     bind.tvHello.text = it.data[0].title
                 }
                 is ConsumeResult.onError -> {
-                    it.e.localizedMessage.makeToast()
+                    bind.tvHello.text = it.e.localizedMessage
                 }
                 is ConsumeResult.onLoading -> {
                     showLoadingDialog(it.loading)
                 }
+                else -> {}
             }
         }
+
     }
 
 }

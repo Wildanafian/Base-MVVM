@@ -1,7 +1,9 @@
 package com.base.myapplication.domain
 
 import com.base.myapplication.data.model.ArticlesItem
+import com.base.myapplication.data.model.ArticlesItemFiltered
 import com.base.myapplication.data.repository.remote.network.ConsumeResult
+import io.reactivex.Single
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -13,4 +15,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface MainActivityUseCase {
     fun getSomething(): Flow<ConsumeResult<List<ArticlesItem>>>
+    fun getSomethingRxJava(): Single<List<ArticlesItemFiltered>>
 }

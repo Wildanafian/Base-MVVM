@@ -1,8 +1,10 @@
 package com.base.myapplication.domain
 
 import com.base.myapplication.data.model.ArticlesItem
+import com.base.myapplication.data.model.ArticlesItemFiltered
 import com.base.myapplication.data.repository.SomeRepository
 import com.base.myapplication.data.repository.remote.network.ConsumeResult
+import io.reactivex.Single
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -18,5 +20,9 @@ class MainActivityUseCaseImpl @Inject constructor(private val repository: SomeRe
 
     override fun getSomething(): Flow<ConsumeResult<List<ArticlesItem>>> {
         return repository.getSomething()
+    }
+
+    override fun getSomethingRxJava(): Single<List<ArticlesItemFiltered>> {
+        return repository.getSomeDataUsingRxJava()
     }
 }

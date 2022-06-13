@@ -1,9 +1,11 @@
 package com.base.myapplication.data.repository
 
 import com.base.myapplication.data.model.ArticlesItem
+import com.base.myapplication.data.model.ArticlesItemFiltered
 import com.base.myapplication.data.repository.remote.SomeRemoteData
 import com.base.myapplication.data.repository.remote.network.ConsumeResult
 import com.base.myapplication.data.repository.remote.network.RemoteResult
+import io.reactivex.Single
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -32,6 +34,15 @@ class SomeRepositoryImpl @Inject constructor(
         }.catch {
             emit(ConsumeResult.onError(Exception(it)))
         }.flowOn(Dispatchers.IO)
+    }
+
+    //sample 3
+    override fun getSomeDataUsingRxJava(): Single<List<ArticlesItemFiltered>> {
+        return someRemoteData.getSomeDataUsingRxJava().map { it ->
+            it.articles.map {
+                ArticlesItemFiltered(it.author, it.title, it.url)
+            }
+        }
     }
 
     //sample 2

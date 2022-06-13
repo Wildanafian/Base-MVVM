@@ -43,12 +43,12 @@ class ExampleFragment: BaseFragment<ActivityMainBinding>() {
     }
 
     override fun initObserver() {
-        viewModel.getSomething().observe(viewLifecycleOwner) {
+//        viewModel.getSomething().observe(viewLifecycleOwner) {
             //observe something
 //            it.makeToast()
 //            it.writeToPref("key")
 //            FCMID.readFromPref()
 //            "key".makeToast()
-        }
+//        }
     }
 }
