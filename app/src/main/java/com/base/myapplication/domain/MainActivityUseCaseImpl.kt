@@ -1,8 +1,8 @@
 package com.base.myapplication.domain
 
-import com.base.myapplication.data.model.ArticlesItem
+import com.base.core.model.ArticlesItem
+import com.base.core.network.ConsumeResult
 import com.base.myapplication.data.repository.SomeRepository
-import com.base.myapplication.data.repository.remote.network.ConsumeResult
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

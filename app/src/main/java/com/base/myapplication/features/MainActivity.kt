@@ -1,7 +1,7 @@
 package com.base.myapplication.features
 
 import android.view.LayoutInflater
-import com.base.myapplication.base.BaseActivity
+import com.base.core.base.BaseActivity
 import com.base.myapplication.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 

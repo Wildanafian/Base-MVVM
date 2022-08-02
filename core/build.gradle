@@ -1,0 +1,12 @@
+plugins {
+    id 'com.android.library'
+}
+apply from: "$rootProject.projectDir/commons.gradle"
+
+android {
+    buildTypes.each {
+        it.buildConfigField 'String', 'APIKey', APIKey
+    }
+}
+
+dependencies {}

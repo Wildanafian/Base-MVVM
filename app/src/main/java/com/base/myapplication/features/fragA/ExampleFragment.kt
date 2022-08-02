@@ -2,8 +2,8 @@ package com.base.myapplication.features.fragA
 
 import android.view.LayoutInflater
 import androidx.fragment.app.viewModels
-import com.base.myapplication.base.BaseFragment
-import com.base.myapplication.data.repository.remote.network.ConsumeResult
+import com.base.core.base.BaseFragment
+import com.base.core.network.ConsumeResult
 import com.base.myapplication.databinding.FragmentMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
  */
 
 @AndroidEntryPoint
-class ExampleFragment: BaseFragment<FragmentMainBinding>() {
+class ExampleFragment : BaseFragment<FragmentMainBinding>() {
 
     private val viewModel: ExampleFragmentViewModel by viewModels()
     private val adapter by lazy { ExampleAdapter() }

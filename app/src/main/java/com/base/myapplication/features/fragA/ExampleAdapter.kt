@@ -3,8 +3,8 @@ package com.base.myapplication.features.fragA
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.base.myapplication.base.BaseRecycleViewAdapter
-import com.base.myapplication.data.model.BaseResponse
+import com.base.core.base.BaseRecycleViewAdapter
+import com.base.core.model.BaseResponse
 import com.base.myapplication.databinding.ItemRecycleviewBinding
 
 /**

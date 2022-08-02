@@ -2,7 +2,7 @@ package com.base.myapplication.features.fagB
 
 import android.view.LayoutInflater
 import androidx.navigation.fragment.navArgs
-import com.base.myapplication.base.BaseFragment
+import com.base.core.base.BaseFragment
 import com.base.myapplication.databinding.FragmentBBinding
 import com.base.myapplication.features.fragA.ExampleFragmentArgs
 

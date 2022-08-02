@@ -1,10 +1,10 @@
 package com.base.myapplication.data.repository
 
-import com.base.myapplication.data.model.ArticlesItem
+import com.base.core.di.IoDispatcher
+import com.base.core.model.ArticlesItem
+import com.base.core.network.ConsumeResult
+import com.base.core.network.RemoteResult
 import com.base.myapplication.data.repository.remote.SomeRemoteData
-import com.base.myapplication.data.repository.remote.network.ConsumeResult
-import com.base.myapplication.data.repository.remote.network.RemoteResult
-import com.base.myapplication.di.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch

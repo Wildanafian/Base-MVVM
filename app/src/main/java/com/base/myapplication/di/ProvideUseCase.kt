@@ -19,5 +19,5 @@ import dagger.hilt.components.SingletonComponent
 interface ProvideUseCase {
 
     @Binds
-    fun provideMainActivityUseCase(useCase: MainActivityUseCaseImpl) : MainActivityUseCase
+    fun provideMainActivityUseCase(useCase: MainActivityUseCaseImpl): MainActivityUseCase
 }

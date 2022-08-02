@@ -1,7 +1,7 @@
 package com.base.myapplication.domain
 
-import com.base.myapplication.data.model.ArticlesItem
-import com.base.myapplication.data.repository.remote.network.ConsumeResult
+import com.base.core.model.ArticlesItem
+import com.base.core.network.ConsumeResult
 import kotlinx.coroutines.flow.Flow
 
 /**

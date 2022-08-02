@@ -1,8 +1,8 @@
 package com.base.myapplication.data.repository.remote
 
-import com.base.myapplication.data.repository.remote.network.ApiInterface
-import com.base.myapplication.data.repository.remote.network.BaseDataSource
-import com.base.myapplication.di.IoDispatcher
+import com.base.core.di.IoDispatcher
+import com.base.core.network.ApiInterface
+import com.base.core.network.BaseDataSource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

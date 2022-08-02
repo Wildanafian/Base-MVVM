@@ -1,7 +1,7 @@
 package com.base.myapplication.data.repository.remote
 
-import com.base.myapplication.data.model.ResponseNewsApi
-import com.base.myapplication.data.repository.remote.network.RemoteResult
+import com.base.core.model.ResponseNewsApi
+import com.base.core.network.RemoteResult
 
 /**
  * Created by Wildan Nafian on 12/05/2022.
