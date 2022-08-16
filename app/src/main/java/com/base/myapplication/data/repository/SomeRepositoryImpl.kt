@@ -29,10 +29,10 @@ class SomeRepositoryImpl @Inject constructor(
         return flow {
             when (val data = someRemoteData.getSomeData()) {
                 is RemoteResult.onSuccess -> emit(ConsumeResult.onSuccess(data.data.articles))
-                is RemoteResult.onError -> emit(ConsumeResult.onError(Exception(data.e)))
+                is RemoteResult.onError -> emit(ConsumeResult.onError(data.dataError.message ?: ""))
             }
         }.catch {
-            emit(ConsumeResult.onError(Exception(it)))
+            emit(ConsumeResult.onError(it.localizedMessage ?: ""))
         }.flowOn(ioDispatcher)
     }
 

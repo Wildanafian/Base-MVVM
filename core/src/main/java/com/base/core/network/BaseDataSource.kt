@@ -11,25 +11,24 @@ abstract class BaseDataSource {
             if (response.isSuccessful) {
                 val body = response.body()
                 if (body != null) RemoteResult.onSuccess(body)
-                else RemoteResult.onError(Exception("body is null"))
+                else RemoteResult.onError(response.code(), ResponseDataError(message = "body is null"))
             } else {
-                val data =
-                    Gson().fromJson(response.errorBody()?.string(), ResponseDataError::class.java)
-                RemoteResult.onError(Exception("${response.code()} : ${data.message}"))
+                val data = Gson().fromJson(response.errorBody()?.string(), ResponseDataError::class.java)
+                RemoteResult.onError(response.code(), data)
             }
         } catch (e: Exception) {
-            RemoteResult.onError(e)
+            RemoteResult.onError(0, ResponseDataError(message = e.localizedMessage))
         }
     }
 }
 
 sealed class RemoteResult<out R> {
-    class onSuccess<out T>(val data: T) : RemoteResult<T>()
-    class onError(val e: Exception) : RemoteResult<Nothing>()
+    data class onSuccess<out T>(val data: T) : RemoteResult<T>()
+    data class onError(val code: Int, val dataError: ResponseDataError) : RemoteResult<Nothing>()
 }
 
 sealed class ConsumeResult<out R> {
-    class onSuccess<out T>(val data: T) : ConsumeResult<T>()
-    class onError(val e: Exception) : ConsumeResult<Nothing>()
-    class onLoading(val loading: Boolean) : ConsumeResult<Nothing>()
+    data class onSuccess<out T>(val data: T) : ConsumeResult<T>()
+    data class onError(val errorMessage: String) : ConsumeResult<Nothing>()
+    data class onLoading(val loading: Boolean) : ConsumeResult<Nothing>()
 }

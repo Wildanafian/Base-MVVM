@@ -1,0 +1,24 @@
+package com.base.myapplication.helper
+
+import com.base.core.model.ResponseDataError
+import com.base.core.model.ResponseNewsApi
+import com.google.gson.Gson
+
+
+/**
+ * Created by Wildan Nafian on 12/08/2022.
+ * Github https://github.com/Wildanafian
+ * wildanafian8@gmail.com
+ */
+object MockkConst {
+
+    val succesData =
+        "{\"status\":\"ok\",\"totalResults\":14871,\"articles\":[{\"source\":{\"id\":null,\"name\":\"Auto-swiat.pl\"},\"author\":\"Rafał Sękalski\",\"title\":\"Tesla pobita. Teraz to Taycan jest najszybszy [WIDEO]\",\"description\":\"Należący do Tesli Model S Plaid rekord okrążenia Pętli Północnej toru Nurburgring wynoszący 7 minut 35 s został właśnie pobity przez najnowsze Porsche Taycan Turbo S wyposażone w specjalny zestaw Performance. Tytuł najszybszego elektryka na tym obiekcie wraca…\",\"url\":\"https://www.auto-swiat.pl/ev/wiadomosci/porsche-taycan-turbo-s-najlepszy-na-nurburgringu-wideo/j160xxx\",\"urlToImage\":\"https://ocdn.eu/pulscms-transforms/1/eknktkpTURBXy9iOTg0ODE4NTE5YTRkY2IwMzJiMzQ5MDEyOWVkODE3MS5qcGeSlQMAzQG-zRNAzQrUkwXNBLDNAnY\",\"publishedAt\":\"2022-08-11T10:20:16Z\",\"content\":\"Nowy rekord okrenia wynosi dokadnie 7:33:350, i jest ponad dwie sekundy lepszy od wyniku osignitego przez Tesl Model S Plaid, która zanotowaa czas 7:35:579 (oficjalnie zatwierdzony wtedy jako rekord,… [+2075 chars]\"},{\"source\":{\"id\":null,\"name\":\"City A.M.\"},\"author\":\"Darren Parkin\",\"title\":\"Crypto markets surge after better-than-expected US inflation figures\",\"description\":\"The price of Bitcoin jumped two per cent after the inflation data for July was released, and sat at around \$24,600 this morning.\\nThe post Crypto markets surge after better-than-expected US inflation figures appeared first on CityAM.\",\"url\":\"https://www.cityam.com/crypto-markets-surge-after-better-than-expected-us-inflation-figures/\",\"urlToImage\":\"https://www.cityam.com/wp-content/uploads/2021/11/crypto-am-daily-5.jpeg\",\"publishedAt\":\"2022-08-11T10:05:56Z\",\"content\":\"Thursday 11 August 2022 11:05 am\\r\\nAfter a slower start to the week, the crypto markets burst into life yesterday following the announcement of lower-than-expected US inflation figures. \\r\\nThe Consumer… [+5561 chars]\"}]}"
+
+    val failedData =
+        "{\"status\":\"error\",\"code\":\"apiKeyInvalid\",\"message\":\"Your API key is invalid or incorrect. Check your key, or go to https://newsapi.org to create a free API key.\"}"
+
+    val successExpectedResult = Gson().fromJson(succesData, ResponseNewsApi::class.java)
+
+    val failedExpectedResult = Gson().fromJson(failedData, ResponseDataError::class.java)
+}

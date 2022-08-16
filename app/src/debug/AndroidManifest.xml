@@ -1,0 +1,10 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.base.myapplication">
+
+    <application>
+        <activity
+            android:name=".FakeHiltEntryActivity"
+            android:exported="false">
+        </activity>
+    </application>
+</manifest><!--            android:name="com.base.myapplication.features.MainActivity"-->

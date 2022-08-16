@@ -9,4 +9,6 @@ android {
     }
 }
 
-dependencies {}
+dependencies {
+    implementation 'androidx.test.espresso:espresso-idling-resource:3.4.0'
+}

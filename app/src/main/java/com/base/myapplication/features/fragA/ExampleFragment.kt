@@ -35,7 +35,7 @@ class ExampleFragment : BaseFragment<FragmentMainBinding>() {
                     bind.tvHello.text = it.data[0].title
                 }
                 is ConsumeResult.onError -> {
-                    it.e.localizedMessage.makeToast()
+                    it.errorMessage.makeToast()
                 }
                 is ConsumeResult.onLoading -> {
                     showLoadingDialog(it.loading)

@@ -1,8 +1,10 @@
 package com.base.myapplication.data.repository.remote
 
 import com.base.core.di.IoDispatcher
+import com.base.core.model.ResponseNewsApi
 import com.base.core.network.ApiInterface
 import com.base.core.network.BaseDataSource
+import com.base.core.network.RemoteResult
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -19,8 +21,12 @@ class SomeRemoteDataImpl @Inject constructor(
 ) : SomeRemoteData,
     BaseDataSource() {
 
-    override suspend fun getSomeData() = withContext(ioDispatcher) {
-        getResult { apiInterface.getAllNews() }
+    override suspend fun getSomeData(): RemoteResult<ResponseNewsApi> {
+//        EspressoIdlingResource.increment()
+        val data = withContext(ioDispatcher) {
+            getResult { apiInterface.getAllNews() }
+        }
+//        EspressoIdlingResource.decrement()
+        return data
     }
-
 }
