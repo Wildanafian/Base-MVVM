@@ -1,7 +1,7 @@
 package com.base.core.di
 
-import com.base.core.network.ApiEndPoint.BASE_URL
-import com.base.core.network.ApiInterface
+import com.base.core.datasource.network.ApiEndPoint.BASE_URL
+import com.base.core.datasource.network.ApiInterface
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

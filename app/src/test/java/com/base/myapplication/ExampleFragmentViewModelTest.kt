@@ -1,8 +1,8 @@
 package com.base.myapplication
 
 import androidx.lifecycle.Observer
-import com.base.core.model.ArticlesItem
-import com.base.core.network.ConsumeResult
+import com.base.core.datasource.model.ArticlesItem
+import com.base.core.datasource.network.ConsumeResult
 import com.base.myapplication.domain.MainActivityUseCase
 import com.base.myapplication.features.fragA.ExampleFragmentViewModel
 import com.base.myapplication.helper.BaseTestInstantTaskExecutorRule

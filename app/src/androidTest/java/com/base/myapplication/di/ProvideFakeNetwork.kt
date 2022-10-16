@@ -1,7 +1,7 @@
 package com.base.myapplication.di
 
 import com.base.core.di.ProvideNetwork
-import com.base.core.network.ApiInterface
+import com.base.core.datasource.network.ApiInterface
 import com.base.myapplication.helper.MockkWebServerConst.mockWebServer
 import dagger.Module
 import dagger.Provides

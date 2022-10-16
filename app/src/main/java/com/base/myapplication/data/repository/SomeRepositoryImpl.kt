@@ -1,15 +1,13 @@
 package com.base.myapplication.data.repository
 
+import com.base.core.datasource.model.ArticlesItem
+import com.base.core.datasource.network.ConsumeResult
+import com.base.core.datasource.network.RemoteResult
 import com.base.core.di.IoDispatcher
-import com.base.core.model.ArticlesItem
-import com.base.core.network.ConsumeResult
-import com.base.core.network.RemoteResult
-import com.base.myapplication.data.repository.remote.SomeRemoteData
+import com.base.myapplication.data.datasource.remote.SomeRemoteData
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.*
+import java.net.SocketException
 import javax.inject.Inject
 
 /**
@@ -31,6 +29,8 @@ class SomeRepositoryImpl @Inject constructor(
                 is RemoteResult.onSuccess -> emit(ConsumeResult.onSuccess(data.data.articles))
                 is RemoteResult.onError -> emit(ConsumeResult.onError(data.dataError.message ?: ""))
             }
+        }.retryWhen { cause, attempt ->
+            cause is SocketException && attempt < 2
         }.catch {
             emit(ConsumeResult.onError(it.localizedMessage ?: ""))
         }.flowOn(ioDispatcher)

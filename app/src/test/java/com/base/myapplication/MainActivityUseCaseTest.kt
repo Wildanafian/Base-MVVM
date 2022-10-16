@@ -1,6 +1,6 @@
 package com.base.myapplication
 
-import com.base.core.network.ConsumeResult
+import com.base.core.datasource.network.ConsumeResult
 import com.base.myapplication.data.repository.SomeRepository
 import com.base.myapplication.domain.MainActivityUseCaseImpl
 import com.base.myapplication.helper.MockkConst.failedExpectedResult

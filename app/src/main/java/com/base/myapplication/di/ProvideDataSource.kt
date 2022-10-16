@@ -1,7 +1,9 @@
 package com.base.myapplication.di
 
-import com.base.myapplication.data.repository.remote.SomeRemoteData
-import com.base.myapplication.data.repository.remote.SomeRemoteDataImpl
+import com.base.myapplication.data.datasource.local.LocalSource
+import com.base.myapplication.data.datasource.local.LocalSourceImpl
+import com.base.myapplication.data.datasource.remote.SomeRemoteData
+import com.base.myapplication.data.datasource.remote.SomeRemoteDataImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -16,7 +18,10 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-interface ProvideRemoteSource {
+interface ProvideDataSource {
+
+    @Binds
+    fun provideLocalData(useCase: LocalSourceImpl): LocalSource
 
     @Binds
     fun provideRemoteData(useCase: SomeRemoteDataImpl): SomeRemoteData

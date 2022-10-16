@@ -10,11 +10,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.viewbinding.ViewBinding
 import com.base.core.R
-import com.bumptech.glide.Glide
-import com.google.android.material.snackbar.Snackbar
 import com.base.core.base.common.BaseCommonFunction
 import com.base.core.databinding.CustomLoadingBinding
+import com.base.core.util.Inflate
 import com.base.core.util.networkCheck
+import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 
 /**
  * Created by Wildan Nafian on 12/01/2022.
@@ -22,21 +23,18 @@ import com.base.core.util.networkCheck
  * wildanafian8@gmail.com
  */
 
-abstract class BaseActivity<out VB : ViewBinding> : AppCompatActivity(), BaseCommonFunction {
+abstract class BaseActivity<out VB : ViewBinding>(private val inflate: Inflate<VB>) :
+    AppCompatActivity(), BaseCommonFunction {
 
-    private var _binding: ViewBinding? = null
-    abstract val bindingInflater: (LayoutInflater) -> VB
-
-    @Suppress("UNCHECKED_CAST")
-    protected val bind: VB
-        get() = this._binding as VB
+    private var _binding: VB? = null
+    protected val bind get() = _binding!!
 
     private lateinit var loadingBinding: CustomLoadingBinding
     private lateinit var loadingAlert: AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = bindingInflater.invoke(layoutInflater)
+        _binding = inflate(layoutInflater)
         setContentView(requireNotNull(_binding).root)
         initView()
         initListener()

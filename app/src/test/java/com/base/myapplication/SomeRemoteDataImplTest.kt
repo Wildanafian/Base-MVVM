@@ -1,9 +1,9 @@
 package com.base.myapplication
 
-import com.base.core.model.ResponseDataError
-import com.base.core.network.ApiInterface
-import com.base.core.network.RemoteResult
-import com.base.myapplication.data.repository.remote.SomeRemoteDataImpl
+import com.base.core.datasource.model.ResponseDataError
+import com.base.core.datasource.network.ApiInterface
+import com.base.core.datasource.network.RemoteResult
+import com.base.myapplication.data.datasource.remote.SomeRemoteDataImpl
 import com.base.myapplication.helper.MockkConst.failedData
 import com.base.myapplication.helper.MockkConst.failedExpectedResult
 import com.base.myapplication.helper.MockkConst.successExpectedResult

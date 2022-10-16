@@ -1,4 +1,4 @@
-package com.base.core.model
+package com.base.core.datasource.model
 
 import com.google.gson.annotations.SerializedName
 

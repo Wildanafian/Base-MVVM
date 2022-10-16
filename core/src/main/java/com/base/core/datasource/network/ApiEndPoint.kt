@@ -1,4 +1,4 @@
-package com.base.core.network
+package com.base.core.datasource.network
 
 object ApiEndPoint {
     const val BASE_URL = "https://newsapi.org/v2/"

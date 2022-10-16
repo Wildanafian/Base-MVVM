@@ -1,7 +1,7 @@
-package com.base.core.network
+package com.base.core.datasource.network
 
 import com.google.gson.Gson
-import com.base.core.model.ResponseDataError
+import com.base.core.datasource.model.ResponseDataError
 import retrofit2.Response
 
 abstract class BaseDataSource {
@@ -11,7 +11,10 @@ abstract class BaseDataSource {
             if (response.isSuccessful) {
                 val body = response.body()
                 if (body != null) RemoteResult.onSuccess(body)
-                else RemoteResult.onError(response.code(), ResponseDataError(message = "body is null"))
+                else RemoteResult.onError(
+                    response.code(),
+                    ResponseDataError(message = "body is null")
+                )
             } else {
                 val data = Gson().fromJson(response.errorBody()?.string(), ResponseDataError::class.java)
                 RemoteResult.onError(response.code(), data)

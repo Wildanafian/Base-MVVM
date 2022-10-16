@@ -1,16 +1,16 @@
-package com.base.core.model
+package com.base.core.datasource.model
 
 import com.google.gson.annotations.SerializedName
 
 data class ResponseNewsApi(
 
-	@field:SerializedName("totalResults")
+    @field:SerializedName("totalResults")
 	val totalResults: Int,
 
-	@field:SerializedName("articles")
+    @field:SerializedName("articles")
 	val articles: List<ArticlesItem>,
 
-	@field:SerializedName("status")
+    @field:SerializedName("status")
 	val status: String
 )
 
@@ -25,28 +25,28 @@ data class Source(
 
 data class ArticlesItem(
 
-	@field:SerializedName("publishedAt")
+    @field:SerializedName("publishedAt")
 	val publishedAt: String,
 
-	@field:SerializedName("author")
+    @field:SerializedName("author")
 	val author: String? = "",
 
-	@field:SerializedName("urlToImage")
+    @field:SerializedName("urlToImage")
 	val urlToImage: String,
 
-	@field:SerializedName("description")
+    @field:SerializedName("description")
 	val description: String,
 
-	@field:SerializedName("source")
+    @field:SerializedName("source")
 	val source: Source,
 
-	@field:SerializedName("title")
+    @field:SerializedName("title")
 	val title: String,
 
-	@field:SerializedName("url")
+    @field:SerializedName("url")
 	val url: String,
 
-	@field:SerializedName("content")
+    @field:SerializedName("content")
 	val content: String
 )
 

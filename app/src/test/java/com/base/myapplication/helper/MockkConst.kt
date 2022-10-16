@@ -1,7 +1,7 @@
 package com.base.myapplication.helper
 
-import com.base.core.model.ResponseDataError
-import com.base.core.model.ResponseNewsApi
+import com.base.core.datasource.model.ResponseDataError
+import com.base.core.datasource.model.ResponseNewsApi
 import com.google.gson.Gson
 
 

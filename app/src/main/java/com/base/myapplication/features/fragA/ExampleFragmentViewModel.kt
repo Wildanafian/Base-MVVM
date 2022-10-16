@@ -3,8 +3,8 @@ package com.base.myapplication.features.fragA
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import com.base.core.model.ArticlesItem
-import com.base.core.network.ConsumeResult
+import com.base.core.datasource.model.ArticlesItem
+import com.base.core.datasource.network.ConsumeResult
 import com.base.myapplication.domain.MainActivityUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.onCompletion

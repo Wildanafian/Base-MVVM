@@ -8,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.viewbinding.ViewBinding
 import com.base.core.base.common.CommonInitialization
 import com.base.core.base.common.CommonToast
+import com.base.core.util.Inflate
 
 /**
  * Created by Wildan Nafian on 25/05/2022.
@@ -18,20 +20,21 @@ import com.base.core.base.common.CommonToast
  */
 
 
-abstract class BaseDialogFragment(private val layout: Int) : DialogFragment(), CommonInitialization,
+abstract class BaseDialogFragment<out VB : ViewBinding>(private val inflate: Inflate<VB>) : DialogFragment(), CommonInitialization,
     CommonToast {
 
-    private lateinit var mView: View
+    private var _binding: VB? = null
+    protected val bind get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mView = inflater.inflate(layout, container, false)
+        _binding = inflate(inflater)
         initView()
         initListener()
-        return mView
+        return bind.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,5 +45,17 @@ abstract class BaseDialogFragment(private val layout: Int) : DialogFragment(), C
 
     override fun String?.makeToast() {
         Toast.makeText(requireContext(), this, Toast.LENGTH_SHORT).show()
+    }
+
+    fun View.listener(callback: () -> Unit) {
+        this.setOnClickListener {
+            callback()
+            dismiss()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

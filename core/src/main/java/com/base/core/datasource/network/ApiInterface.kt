@@ -1,8 +1,8 @@
-package com.base.core.network
+package com.base.core.datasource.network
 
 import com.base.core.BuildConfig
-import com.base.core.model.BaseResponse
-import com.base.core.model.ResponseNewsApi
+import com.base.core.datasource.model.BaseResponse
+import com.base.core.datasource.model.ResponseNewsApi
 import retrofit2.Response
 import retrofit2.http.*
 

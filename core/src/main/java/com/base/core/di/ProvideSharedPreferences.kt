@@ -1,7 +1,7 @@
 package com.base.core.di
 
-import com.base.core.sharedpreference.SharedPref
-import com.base.core.sharedpreference.SharedPrefImpl
+import com.base.core.datasource.local.SharedPref
+import com.base.core.datasource.local.SharedPrefImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

@@ -1,4 +1,4 @@
-package com.base.core.sharedpreference
+package com.base.core.datasource.local
 
 import android.content.SharedPreferences
 import javax.inject.Inject
@@ -42,12 +42,6 @@ class SharedPrefImpl @Inject constructor(private val sharedPreferences: SharedPr
 
     override fun clearByKey(key: String) {
         sharedPreferences.edit().remove(key).apply()
-    }
-
-    override fun clearLoginData() {
-//        sharedPreferences.edit().remove("login").apply()
-//        sharedPreferences.edit().remove("profile").apply()
-//        sharedPreferences.edit().remove("data").apply()
     }
 
 }

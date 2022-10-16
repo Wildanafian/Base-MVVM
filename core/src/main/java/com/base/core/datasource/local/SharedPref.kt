@@ -1,4 +1,4 @@
-package com.base.core.sharedpreference
+package com.base.core.datasource.local
 
 
 /**
@@ -18,8 +18,5 @@ interface SharedPref {
 
     fun clearAllData()
     fun clearByKey(key: String)
-
-    //////optional example///////
-    fun clearLoginData()
 
 }
