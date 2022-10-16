@@ -15,6 +15,8 @@ import androidx.viewbinding.ViewBinding
 import com.base.core.R
 import com.base.core.base.common.BaseCommonFunction
 import com.base.core.databinding.CustomLoadingBinding
+import com.base.core.util.FragmentLifecycleAwareCoroutine
+import com.base.core.util.Inflate
 import com.bumptech.glide.Glide
 
 /**
@@ -22,15 +24,13 @@ import com.bumptech.glide.Glide
  * Github https://github.com/Wildanafian
  * wildanafian8@gmail.com
  */
+abstract class BaseFragment<out VB : ViewBinding>(private val inflate: Inflate<VB>) : Fragment(),
+    BaseCommonFunction {
 
-abstract class BaseFragment<out VB : ViewBinding> : Fragment(), BaseCommonFunction {
+    private var _binding: VB? = null
+    protected val bind get() = _binding!!
 
-    private var _binding: ViewBinding? = null
-    abstract val bindingInflater: (LayoutInflater) -> VB
-
-    @Suppress("UNCHECKED_CAST")
-    protected val bind: VB
-        get() = this._binding as VB
+    protected val mainScope by lazy { FragmentLifecycleAwareCoroutine() }
 
     private var _loadingBinding: CustomLoadingBinding? = null
     private val loadingBinding get() = _loadingBinding!!
@@ -41,7 +41,7 @@ abstract class BaseFragment<out VB : ViewBinding> : Fragment(), BaseCommonFuncti
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = bindingInflater.invoke(layoutInflater)
+        _binding = inflate(inflater)
         initView()
         initListener()
         initObserver()
@@ -51,6 +51,7 @@ abstract class BaseFragment<out VB : ViewBinding> : Fragment(), BaseCommonFuncti
     override fun onDestroy() {
         super.onDestroy()
         showLoadingDialog(false)
+        _loadingBinding = null
         _binding = null
     }
 
@@ -62,7 +63,8 @@ abstract class BaseFragment<out VB : ViewBinding> : Fragment(), BaseCommonFuncti
 
     protected fun gooTo(directions: NavDirections) = findNavController().navigate(directions)
 
-    override fun String?.makeToast() = Toast.makeText(requireContext(), this ?: "", Toast.LENGTH_SHORT).show()
+    override fun String?.makeToast() =
+        Toast.makeText(requireContext(), this ?: "", Toast.LENGTH_SHORT).show()
 
     private fun initBaseLoading() {
         _loadingBinding = CustomLoadingBinding.inflate(layoutInflater)

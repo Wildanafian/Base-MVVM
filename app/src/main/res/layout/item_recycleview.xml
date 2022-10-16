@@ -5,7 +5,7 @@
     <data>
         <variable
             name="itemData"
-            type="com.base.core.model.BaseResponse" />
+            type="com.base.core.datasource.model.BaseResponse" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

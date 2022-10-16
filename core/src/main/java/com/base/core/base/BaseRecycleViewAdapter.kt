@@ -1,10 +1,13 @@
 package com.base.core.base
 
 import android.content.Context
-import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
+import java.lang.ref.WeakReference
 
 /**
  * Created by Wildan Nafian on 12/01/2022.
@@ -12,12 +15,11 @@ import androidx.recyclerview.widget.RecyclerView
  * wildanafian8@gmail.com
  */
 
-abstract class BaseRecycleViewAdapter<T, RV : RecyclerView.ViewHolder?> : RecyclerView.Adapter<RV>() {
+abstract class BaseRecycleViewAdapter<T, RV : RecyclerView.ViewHolder>(fragment: Fragment) : RecyclerView.Adapter<RV>() {
     var mlayout: Int? = null
     var items:ArrayList<T> = ArrayList()
     var customSize = 0
     var context: Context? = null
-
 
     override fun getItemCount(): Int{
         return if (customSize == 0 ) items.size
@@ -56,15 +58,41 @@ abstract class BaseRecycleViewAdapter<T, RV : RecyclerView.ViewHolder?> : Recycl
 
     abstract override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RV
 
-    fun setView(parent: ViewGroup, layout: Int): View {
-        context = parent.context
-        return LayoutInflater.from(parent.context).inflate(layout, parent, false)
-    }
-
     override fun onBindViewHolder(holder: RV, position: Int) {
         getBindViewHolder(holder, position, items[position])
     }
 
     abstract fun getBindViewHolder(holder: RV, position: Int, data: T)
 
+    private val fragmentRef = WeakReference(fragment)
+
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+        setupLifecycleObserver(recyclerView)
+    }
+
+    private fun setupLifecycleObserver(recyclerView: RecyclerView) {
+        val fragment = fragmentRef.get() ?: return
+        val weakThis = WeakReference(this)
+        val weakRecyclerView = WeakReference(recyclerView)
+
+        fragment.viewLifecycleOwner.lifecycle.addObserver(object : LifecycleEventObserver {
+            override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
+                val actualRecyclerView = weakRecyclerView.get() ?: return
+                when (event.targetState) {
+                    Lifecycle.State.DESTROYED -> {
+                        clear()
+                        actualRecyclerView.adapter = null
+                    }
+                    Lifecycle.State.RESUMED -> {
+                        val self = weakThis.get() ?: return
+                        if (actualRecyclerView.adapter != self) {
+                            actualRecyclerView.adapter = self
+                        }
+                    }
+                    else -> {}
+                }
+            }
+        })
+    }
 }

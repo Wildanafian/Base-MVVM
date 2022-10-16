@@ -1,9 +1,8 @@
 package com.base.myapplication.features.fragA
 
-import android.view.LayoutInflater
 import androidx.fragment.app.viewModels
 import com.base.core.base.BaseFragment
-import com.base.core.network.ConsumeResult
+import com.base.core.datasource.network.ConsumeResult
 import com.base.myapplication.databinding.FragmentMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -14,13 +13,10 @@ import dagger.hilt.android.AndroidEntryPoint
  */
 
 @AndroidEntryPoint
-class ExampleFragment : BaseFragment<FragmentMainBinding>() {
+class ExampleFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::inflate) {
 
     private val viewModel: ExampleFragmentViewModel by viewModels()
-    private val adapter by lazy { ExampleAdapter() }
-
-    override val bindingInflater: (LayoutInflater) -> FragmentMainBinding
-        get() = FragmentMainBinding::inflate
+    private val adapter by lazy { ExampleAdapter(this) }
 
     override fun initListener() {
         bind.btnMoveToB.setOnClickListener {
@@ -35,7 +31,7 @@ class ExampleFragment : BaseFragment<FragmentMainBinding>() {
                     bind.tvHello.text = it.data[0].title
                 }
                 is ConsumeResult.onError -> {
-                    it.e.localizedMessage.makeToast()
+                    it.errorMessage.makeToast()
                 }
                 is ConsumeResult.onLoading -> {
                     showLoadingDialog(it.loading)

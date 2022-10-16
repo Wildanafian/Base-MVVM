@@ -7,7 +7,8 @@ package com.base.core.util
  */
 
 
-internal object ProjectConstant {
+object ProjectConstant {
     const val TAG = "##"
 
+    const val NEWS = "news"
 }

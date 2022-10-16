@@ -2,9 +2,10 @@ package com.base.myapplication.features.fragA
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.base.core.base.BaseRecycleViewAdapter
-import com.base.core.model.BaseResponse
+import com.base.core.datasource.model.BaseResponse
 import com.base.myapplication.databinding.ItemRecycleviewBinding
 
 /**
@@ -14,7 +15,7 @@ import com.base.myapplication.databinding.ItemRecycleviewBinding
  */
 
 
-class ExampleAdapter : BaseRecycleViewAdapter<BaseResponse, ExampleAdapter.ViewHolder>() {
+class ExampleAdapter(fragment: Fragment) : BaseRecycleViewAdapter<BaseResponse, ExampleAdapter.ViewHolder>(fragment) {
 
     var someClickListener: ((BaseResponse) -> Unit)? = null
 

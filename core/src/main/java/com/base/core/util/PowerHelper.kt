@@ -12,12 +12,29 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
+import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import android.widget.ArrayAdapter
+import android.widget.EditText
 import android.widget.ImageView
+import androidx.activity.addCallback
+import androidx.appcompat.widget.SearchView
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.content.ContextCompat
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.Slide
+import androidx.transition.Transition
+import androidx.transition.TransitionManager
 import com.base.core.BuildConfig
 import com.base.core.R
 import com.bumptech.glide.Glide
@@ -413,4 +430,98 @@ fun Context.networkCheck(): Boolean {
         if (activeNetworkInfo != null && activeNetworkInfo.isConnected) return true
     }
     return false
+}
+
+typealias Inflate<T> = (LayoutInflater) -> T
+
+
+/**
+ * Created by Ian Damping on 21,February,2020
+ * Github https://github.com/iandamping
+ * Indonesia.
+ */
+fun <T> Fragment.observeEvent(data: LiveData<Event<T>>, onBound: ((T) -> Unit)) {
+    data.observe(this.viewLifecycleOwner, EventObserver {
+        onBound.invoke(it)
+    })
+}
+
+fun <T> Fragment.observe(data: LiveData<T>, onBound: ((T?) -> Unit)) {
+    data.observe(this.viewLifecycleOwner) {
+        onBound.invoke(it)
+    }
+}
+
+fun <T> Fragment.observeText(data: LiveData<T>, onBound: ((T) -> Unit)) {
+    data.observe(this.viewLifecycleOwner) {
+        onBound.invoke(it)
+    }
+}
+
+/**
+ **************************************
+ */
+
+
+fun Fragment.hideKeyboard() {
+    view?.let { activity?.hideKeyboard(it) }
+}
+
+fun Context.hideKeyboard(view: View) {
+    val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+}
+
+fun EditText.listener(callback : ((Int)->Unit)? = null) {
+    this.addTextChangedListener(onTextChanged = { _, _, _, count ->
+        callback?.invoke(count)
+    })
+}
+
+
+fun View.listener(callback: () -> Unit) = this.setOnClickListener {
+    callback()
+}
+
+fun SearchView.listener(
+    onTextChange: ((String) -> Unit)? = null,
+    onTextSubmit: ((String) -> Unit)? = null
+) {
+    this.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        override fun onQueryTextChange(newText: String): Boolean {
+            onTextChange?.invoke(newText)
+            return false
+        }
+
+        override fun onQueryTextSubmit(query: String): Boolean {
+            onTextSubmit?.invoke(query)
+            return false
+        }
+    })
+}
+
+fun LifecycleOwner.disableBackPressed(owner: FragmentActivity) = owner.onBackPressedDispatcher.addCallback(this) {}
+
+fun Fragment.spinnerAdapter(data: ArrayList<String>): ArrayAdapter<String> =
+    ArrayAdapter(this.requireContext(), android.R.layout.simple_spinner_item, data).apply<ArrayAdapter<String>> {
+        setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+    }
+
+fun EditText.getTexts() = this.text.toString()
+
+fun View.setVisibilityAnimSlide(visibility: Int, duration: Long = 200) {
+    val transition: Transition = Slide(Gravity.BOTTOM)
+    transition.duration = duration
+    transition.addTarget(this)
+    TransitionManager.beginDelayedTransition(this.parent as ViewGroup, transition)
+    this.visibility = visibility
+}
+
+fun View.changeMotionLayoutChildVisibility(visibility: Boolean) {
+    val motionLayout = parent as MotionLayout
+    motionLayout.constraintSetIds.forEach {
+        val constraintSet = motionLayout.getConstraintSet(it) ?: return@forEach
+        constraintSet.setVisibility(this.id, if (visibility) View.VISIBLE else View.GONE)
+        constraintSet.applyTo(motionLayout)
+    }
 }

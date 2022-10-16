@@ -1,7 +1,7 @@
 package com.base.myapplication.domain
 
-import com.base.core.model.ArticlesItem
-import com.base.core.network.ConsumeResult
+import com.base.core.datasource.model.ArticlesItem
+import com.base.core.datasource.network.ConsumeResult
 import com.base.myapplication.data.repository.SomeRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
