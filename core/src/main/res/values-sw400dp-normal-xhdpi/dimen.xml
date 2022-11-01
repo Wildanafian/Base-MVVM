@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  dimen 90% from 400dp-->
+
+    <dimen name="space_xxxsmall">6.2dp</dimen>
+    <dimen name="space_xxsmall">8.2dp</dimen>
+    <dimen name="space_xsmall">10.3dp</dimen>
+    <dimen name="space_small">12.4dp</dimen>
+    <dimen name="space_normal">14.4dp</dimen>
+    <dimen name="space_medium">16.5dp</dimen>
+    <dimen name="space_large">18.5dp</dimen>
+    <dimen name="space_xlarge">20.6dp</dimen>
+    <dimen name="space_xxlarge">22.7dp</dimen>
+    <dimen name="space_xxxlarge">24.7dp</dimen>
+    <dimen name="space_jumbo">26.8dp</dimen>
+    <dimen name="space_xjumbo">28.8dp</dimen>
+    <dimen name="space_xxjumbo">30.9dp</dimen>
+    <dimen name="space_xxxjumbo">33dp</dimen>
+    <dimen name="space_xxxxjumbo">35dp</dimen>
+
+    <dimen name="text_xxxsmall">6.2sp</dimen>
+    <dimen name="text_xxsmall">8.2sp</dimen>
+    <dimen name="text_xsmall">10.3sp</dimen>
+    <dimen name="text_small">12.4sp</dimen>
+    <dimen name="text_normal">14.4sp</dimen>
+    <dimen name="text_medium">16.5sp</dimen>
+    <dimen name="text_large">18.5sp</dimen>
+    <dimen name="text_xlarge">20.6sp</dimen>
+    <dimen name="text_xxlarge">22.7sp</dimen>
+    <dimen name="text_xxxlarge">24.7sp</dimen>
+    <dimen name="text_jumbo">26.8sp</dimen>
+    <dimen name="text_xjumbo">28.8sp</dimen>
+    <dimen name="text_xxjumbo">30.9sp</dimen>
+    <dimen name="text_xxxjumbo">33sp</dimen>
+    <dimen name="text_xxxxjumbo">35sp</dimen>
+
+    <dimen name="size_xxxsmall">12.4dp</dimen>
+    <dimen name="size_xxsmall">16.5dp</dimen>
+    <dimen name="size_xsmall">20.6dp</dimen>
+    <dimen name="size_small">24.7dp</dimen>
+    <dimen name="size_normal">28.8dp</dimen>
+    <dimen name="size_medium">33dp</dimen>
+    <dimen name="size_large">37.1dp</dimen>
+    <dimen name="size_xlarge">41.2dp</dimen>
+    <dimen name="size_xxlarge">45.3dp</dimen>
+    <dimen name="size_xxxlarge">49.4dp</dimen>
+    <dimen name="size_xxxxlarge">53.6dp</dimen>
+    <dimen name="size_jumbo">57.7dp</dimen>
+    <dimen name="size_xjumbo">61.8dp</dimen>
+    <dimen name="size_xxjumbo">65.9dp</dimen>
+    <dimen name="size_xxxjumbo">70dp</dimen>
+    <dimen name="size_xxxxjumbo">74.2dp</dimen>
+    <dimen name="size_super">78.3dp</dimen>
+    <dimen name="size_xsuper">82.4dp</dimen>
+    <dimen name="size_xxxsuper">86.5dp</dimen>
+    <dimen name="size_xxxxsuper">90.6dp</dimen>
+
+    <dimen name="fullwidth">378dp</dimen>
+
+    <dimen name="ilustrasi">217.5dp</dimen>
+    <dimen name="ilustrasi_empty_list">158dp</dimen>
+    <dimen name="home_card">126dp</dimen>
+    <dimen name="login_card">400dp</dimen>
+    <dimen name="qr_area">300dp</dimen>
+
+</resources>

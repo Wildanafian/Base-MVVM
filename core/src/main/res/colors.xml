@@ -6,13 +6,7 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
-    <color name="black_70">#B3000000</color>
-    <color name="black_30">#4D000000</color>
-    <color name="black_10">#1A000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="blue">#2f86eb</color>
-    <color name="message_warning">#4DFFC107</color>
-    <color name="message_info">#4D03A9F4</color>
-    <color name="message_error">#4DFD1D1D</color>
+    <color name="red">#FD1D1D</color>
 
 </resources>
